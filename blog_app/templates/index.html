@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sapiens</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&family=Oswald:wght@200&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="{% static 'img/monkey.ico' %}">
+	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+</head>
+<body>
+		<div id="container">
+				<header>
+						<div id="header-bg"></div>
+						<img src="{%static "img/profile-photo.jpeg"%}" alt="profile-photo" id="profile-photo">
+						<div id="profile-title-section">
+								<h3>Sapiens</h3>
+								<p>Last connection: <b>{{last_connection}}</b></p>
+						</div>
+				</header>	
+				<section id="options-nav">
+						<ul>
+								<li><a href="#">Author</a></li>
+								<li><a href="#">All pages</a></li>
+						</ul>
+				</section>
+
+				<section id="pages-container">
+						<div id="reading-pages-container">
+								<h3>Last 1-5 pages:</h3><br><br>
+
+								{% for el in pages %}
+								<div class="page">
+										<div class="page-title">
+												<p>{{el.title}}</p>
+												<div>
+														<form action="{% url 'blog_app:read_page' el.id %}"><button class="go-page-btn">Go</button></form>
+														<form action="{% url 'blog_app:remove_page' el.id %}"><button class="remove-page-btn">Remove</button></form>
+												</div>
+										</div>
+										<p class="page-description">{{el.description}}</p>
+								</div>
+								{% endfor %}
+
+						</div>	
+
+						<div id="writing-pages-container">
+								<h3>Add page:</h3><br></br>
+								<form id="create_page_form" autocomplete='off' action="{% url 'blog_app:create_page' %}" method="POST">
+										{% csrf_token %}
+										<label for="title">Title: </label><br>
+										<input id="title" required name="title" placeholder="..."></input><br>
+
+										<label for="content">Content: </label><br>
+										<textarea id="content" required name="content"></textarea>
+										
+										<button id="discard-btn">Discard page</button>
+										<button id="submit-btn">Publish page</button>
+								</form>
+						</div>
+				</section>
+		</div>
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>
