@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&family=Oswald:wght@200&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="{% static 'img/monkey.ico' %}">
+	<link rel="stylesheet" href="{% static 'styles/page.css' %}">
+</head>
+<body>
+		<form id="go-back-form" action="{% url 'blog_app:index' %}">
+				{%csrf_token%}
+				<button>Go back</button>
+		</form>
+
+		<div id="container">
+				<h2>Gilberto Wu</h2><br>
+				<p>-I like readig, coding, meditate and reflex a bit..., and always learn something new <b>"I haven't tried it, that's why I should try it now"</b> could be one of my main thoughts. The world is something complex and everyone should learn how to live it, and why not try everything? maybe trying you could find something special.</p><br>
+				<p>-Completely disagree with any disrespecful behavior. As humans, we can only do one thing at a time, and it could be something respecful, brilliant, lovely, or disrespecful, stupid, and hateful. No choice is wrong. How can I define what is correct and what is not? I'm not god or anything closer. Being always the best with others and with ourselves is the path that I chose, and I recommend to follow.</p><br>
+				<p>-I love words. I work with them. They give me stability, I use to use definitions all the time to think. I want to take it seriously, maybe that's one of my weeknees, I take words literal, and I don't like to use them wrong. I know that anyone could make mistakes, I surely do, but I am going to work on learning from my mistakes.</p>
+		</div>			
+</body>
+</html>

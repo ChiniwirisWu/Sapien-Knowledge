@@ -25,6 +25,10 @@ def indexView(request):
     return render(request, 'index.html', context={'pages':pages, 'last_connection':lastconection})
 
 
+def authorPage(request):
+    return render(request, 'author.html')
+
+
 def createPage(request):
     model = models.Page
     description = request.POST['content'][:20] + "..."
