@@ -53,3 +53,8 @@ def removePage(request, page_id):
     page = get_object_or_404(model, pk=page_id)
     page.delete()
     return HttpResponseRedirect(reverse('blog_app:index'))
+
+def removeQuestion(request, page_id):
+    model = models.Page
+    page = get_object_or_404(model, pk=page_id)
+    return render(request, 'remove_question.html', context={'page': page})

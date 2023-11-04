@@ -10,6 +10,7 @@ urlpatterns = [
     path('remove/<int:page_id>/', views.removePage, name='remove_page'),
     path('read/<int:page_id>/', views.readPage, name='read_page'),
     path('update_page/', views.updatPage, name='update_page'),
+    path('remove_question/<int:page_id>', views.removeQuestion, name='remove_question'),
 ]
 
 
