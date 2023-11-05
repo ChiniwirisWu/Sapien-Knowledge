@@ -12,6 +12,8 @@ urlpatterns = [
     path('update_page/', views.updatPage, name='update_page'),
     path('remove_question/<int:page_id>', views.removeQuestion, name='remove_question'),
     path('author', views.authorPage, name='author_page'),
+    path('admin_question/', views.adminQuestion, name='admin_question'),
+    path('admin_page/', views.adminPage, name='admin_page'),
 ]
 
 

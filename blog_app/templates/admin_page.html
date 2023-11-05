@@ -24,11 +24,14 @@
 				<section id="options-nav">
 						<ul>
 								<li><a href="{% url 'blog_app:author_page' %}">Author</a></li>
-								<li><a href="{% url 'blog_app:admin_question' %}">Admin</a></li>
+								<li><a href="{% url 'blog_app:index' %}">All pages</a></li>
 						</ul>
 				</section>
 
 				<section id="pages-container">
+						<div id="reading-pages-container">
+								<h3>Pages:</h3><br><br>
+
 								{% for el in pages %}
 								<div class="page">
 										<div class="page-title">
@@ -41,7 +44,25 @@
 										<p class="page-description">{{el.description}}</p>
 								</div>
 								{% endfor %}
+
+						</div>	
+
+						<div id="writing-pages-container">
+								<h3>Add page:</h3><br></br>
+								<form id="create_page_form" autocomplete='off' action="{% url 'blog_app:create_page' %}" method="POST">
+										{% csrf_token %}
+										<label for="title">Title: </label><br>
+										<input id="title" required name="title" placeholder="..."></input><br>
+
+										<label for="content">Content: </label><br>
+										<textarea id="content" required name="content"></textarea>
+										
+										<button id="discard-btn">Discard page</button>
+										<button id="submit-btn">Publish page</button>
+								</form>
+						</div>
 				</section>
 		</div>
 </body>
+<script src="{% static 'js/main.js' %}"></script>
 </html>

@@ -16,7 +16,7 @@ from django.urls import reverse
 
 def indexView(request):
     model = models.Page
-    pages = model.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
+    pages = model.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')
     lastconection = 0;
     if(len(pages) > 0):
         lastconection = pages[0].pub_date
@@ -62,3 +62,16 @@ def removeQuestion(request, page_id):
     model = models.Page
     page = get_object_or_404(model, pk=page_id)
     return render(request, 'remove_question.html', context={'page': page})
+
+def adminQuestion(request):
+    return render(request, 'admin_question.html')
+
+def adminPage(request):
+    model = models.Page
+    pages = model.objects.all()
+    lastconnection = 0;
+    if(len(pages) > 0):
+        lastconnection = pages[0].pub_date
+    else:
+        lastconnection = timezone.now()
+    return render(request, 'admin_page.html', context={'pages':pages.order_by('pub_date'), 'last_connection': lastconnection})
