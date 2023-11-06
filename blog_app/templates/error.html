@@ -10,23 +10,16 @@
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&family=Oswald:wght@200&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="{% static 'img/monkey.ico' %}">
 	<link rel="stylesheet" href="{% static 'styles/general.css' %}">
-	<link rel="stylesheet" href="{% static 'styles/page.css' %}">
 </head>
 <body>
+
+		<div id="container">
 		<form id="go-back-form" action="{% url 'blog_app:index' %}">
 				{%csrf_token%}
 				<button>Go back</button>
 		</form>
+				<h1>This page does not exist!</h1>
+		</div>
 
-		<div id="container">
-				<form action="{% url 'blog_app:admin_page' %}" autocomplete="off" method="POST">
-						{%csrf_token%}
-						<label for="username">Username: </label><br>
-						<input type="text" id="username" required name="username">
-						<label for="password">Password: </label><br>
-						<input type="password" required id="password" name="password">
-						<button>Continue</button>
-				</form>
-		</div>			
 </body>
 </html>

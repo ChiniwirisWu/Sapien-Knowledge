@@ -1,77 +1,94 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
+from .models import Page, User
 from django.utils import timezone
-from . import models
+from django.shortcuts import render, reverse, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 
-# Create your views here.
 
-# class IndexView(generic.ListView):
-    # template_name = 'index.html'
-    # context_object_name = 'pages'
-
-    # def get_queryset(self):
-        # return models.Page.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
-
-def indexView(request):
-    model = models.Page
-    pages = model.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')
-    lastconection = 0;
+#VIEWS
+def getLastPublication():
+    pages = Page.objects.all().order_by('pub_date')
     if(len(pages) > 0):
-        lastconection = pages[0].pub_date
-    else:
-        lastconection = timezone.now()
-    return render(request, 'index.html', context={'pages':pages, 'last_connection':lastconection})
+        return pages[0].pub_date
+    return timezone.now()
 
+def indexPageView(request):
+    pages = Page.objects.all()
+    last_publication = getLastPublication()
+    return render(request, 'index.html', context={'pages':pages, 'last_publication': last_publication})
 
-def authorPage(request):
+def authorPageView(request):
     return render(request, 'author.html')
 
+def adminPageView(request):
+    lastconnection = getLastPublication()
+    try:
+        user = User.objects.get(username=request.POST['username'])
+    except User.DoesNotExist:
+        return render(request, 'error.html')
+    if(user.password == request.POST['password']):
+        return render(request, 'admin_page.html', context={'pages':Page.objects.all().order_by('pub_date'), 'last_connection': lastconnection})
+    else:
+        return HttpResponseRedirect(reverse('blog_app:admin_question'))
 
-def createPage(request):
-    model = models.Page
-    description = request.POST['content'][:20] + "..."
-    page = model(title = request.POST['title'], content = request.POST['content'], pub_date = timezone.now(), description=description)
-    page.save()
-    return HttpResponseRedirect(reverse('blog_app:index'))
-
-
-def readPage(request, page_id):
-    model = models.Page
-    page = get_object_or_404(model, pk=page_id)
+def readPageView(request, page_id):
+    try:
+        page = Page.objects.get(pk=page_id)
+    except Page.DoesNotExist:
+        return HttpResponseRedirect(reverse('blog_app:error_page'))
     return render(request, 'page.html', context={'page': page})
 
-def updatPage(request):
-    model = models.Page
-    page = get_object_or_404(model, pk=request.POST['page_id'])
-    page.content = request.POST['content']
-    page.title = request.POST['title']
-    page.pub_date = timezone.now()
-    page.save()
-    return HttpResponseRedirect(reverse('blog_app:index'))
+def errorView(request):
+    return render(request, 'error.html')
 
-
-def removePage(request, page_id):
-    model = models.Page
-    page = get_object_or_404(model, pk=page_id)
-    page.delete()
-    return HttpResponseRedirect(reverse('blog_app:index'))
-
-def removeQuestion(request, page_id):
-    model = models.Page
-    page = get_object_or_404(model, pk=page_id)
+#Question view
+def removePageQuestionView(request, page_id):
+    try:
+        page = get_object_or_404(Page, pk=page_id)
+    except Page.DoesNotExist:
+        return HttpResponseRedirect(reverse('blog_app:error_page'))
     return render(request, 'remove_question.html', context={'page': page})
 
-def adminQuestion(request):
+def adminPageQuestionView(request):
     return render(request, 'admin_question.html')
 
-def adminPage(request):
-    model = models.Page
-    pages = model.objects.all()
-    lastconnection = 0;
-    if(len(pages) > 0):
-        lastconnection = pages[0].pub_date
-    else:
-        lastconnection = timezone.now()
-    return render(request, 'admin_page.html', context={'pages':pages.order_by('pub_date'), 'last_connection': lastconnection})
+
+#CRUD
+def createPage(request):
+    description = request.POST['content'][:20] + "..."
+    page = Page(title = request.POST['title'], content = request.POST['content'], pub_date = timezone.now(), description=description)
+    page.save()
+    return HttpResponseRedirect(reverse('blog_app:admin_page'))
+
+
+def updatePage(request, page_id):
+    try:
+        page = Page.objects.get(pk=page_id)
+    except Page.DoesNotExist:
+        return HttpResponseRedirect(reverse('blog_app:error_page'))
+    page.title = request.POST['title']
+    page.content = request.POST['content']
+    page.pub_date = timezone.now()
+    page.save()
+    return HttpResponseRedirect(reverse('blog_app:read_page'), args=(page_id,))
+
+def removePage(request, page_id):
+    try:
+        page = Page.objects.get(pk=page_id)
+    except Page.DoesNotExist:
+        return HttpResponseRedirect(reverse('blog_app:error_page'))
+    page.remove()
+    return render(request, 'blog_app:index')
+
+
+
+
+
+
+
+
+
+
+
+
+
+

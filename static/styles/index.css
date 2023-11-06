@@ -1,0 +1,146 @@
+#container{
+		width: 1500px;
+		height: 2000px;
+		border: 1px solid #000;
+		margin: auto;
+		margin-top: 10px;
+}
+
+header{
+		position: relative;
+		width: 100%;
+		height: 300px;
+}
+
+#header-bg{
+		background: url('/static/img/forest.jpg');
+		width: 100%;
+		height: 100%;
+}
+
+#profile-photo{
+		position: absolute;
+		width: 100px;
+		height: 100px;
+		object-fit: cover;
+		bottom: -10px;
+		left: 10px;
+}
+
+#profile-title-section{
+		position: absolute;
+		width: 1480px;
+		display: flex;
+		justify-content: space-between;
+		bottom: -60px;
+		left: 10px;
+}
+
+#options-nav{
+		margin-top: 80px;
+}
+
+#options-nav ul{
+		list-style: none;
+		display: flex;
+		padding-left: 10px;
+}
+
+#options-nav ul li{
+		display: block;
+		padding: 5px;
+}
+
+/*PAGES CONTAINER*/
+#pages-container{
+		height: 500px;
+		width: 98.5%;
+		display: flex;
+		padding: 0px 10px;
+		margin-top: 80px;
+}
+
+#reading-pages-container{
+		flex-basis: 50%;	
+}
+
+
+#writing-pages-container{
+		flex-basis: 50%;	
+}
+
+.page{
+		background-color: rgba(255, 255, 255, .5);
+		display: flex;
+		height: 100px;
+		flex-direction: column;
+		margin-bottom: 10px;
+		padding: 10px 15px;
+		width: 60%;
+		border-radius: 5px;
+		margin: 5px;
+}
+
+.page-title div{
+		display: flex;
+}
+
+.page-title div form{
+		margin-left: 10px;
+}
+
+
+.page-title{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+}
+
+.page-title button{
+		padding: 5px 10px;
+		cursor: pointer;
+		border-radius: 5px;
+}
+
+.page-description{
+		font-style: italic;
+		opacity: .7;
+		font-size: .9em;
+}
+
+
+#writing-pages-container form{
+		width: 96%;
+}
+
+#title, #writing-pages-container form textarea{
+		width: 98%;
+		padding: 5px 10px;
+		border-radius: 5px;
+}
+
+#writing-pages-container form textarea{
+		height: 400px;
+		resize: none;
+}
+
+#writing-pages-container form button{
+		padding: 10px 10px;
+		cursor: pointer;
+		border: 1px solid #fff;
+		border-radius: 20px;
+		margin-top: 15px;
+}
+
+/*HOVER*/
+
+#options-nav ul li:hover{
+		background-color: inherit;
+		opacity: .5;
+}
+
+button:hover{
+		background-color: #fff;
+		color: #000;
+}
+

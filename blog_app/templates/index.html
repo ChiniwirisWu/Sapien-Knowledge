@@ -5,20 +5,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sapiens</title>
+	<link rel="stylesheet" href="{% static 'styles/general.css' %}">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&family=Oswald:wght@200&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/x-icon" href="{% static 'img/monkey.ico' %}">
-	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/index.css' %}">
 </head>
 <body>
+
 		<div id="container">
 				<header>
 						<div id="header-bg"></div>
 						<img src="{%static "img/profile-photo.jpeg"%}" alt="profile-photo" id="profile-photo">
 						<div id="profile-title-section">
 								<h3>Sapiens</h3>
-								<p>Last connection: <b>{{last_connection}}</b></p>
+								<p>Last publication: <b>{{last_publication}}</b></p>
 						</div>
 				</header>	
 				<section id="options-nav">

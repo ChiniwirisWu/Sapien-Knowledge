@@ -1,0 +1,32 @@
+*{
+		margin: 0px;
+		border: 0px;
+		box-sizing; border-box;
+}
+
+html{
+		/*overflow-y: hidden;*/
+		background-color: hsl(100, 100%, 70%);
+		scroll-behavior: smooth;
+		font-family: 'Noto Serif Old Uyghur', sans-serif;
+		font-weight: 100;
+}
+
+h2{
+		font-family: 'Oswald', sans-serif;
+}
+
+
+button{
+		padding: 5px 10px;
+		cursor: pointer;
+		border-radius: 5px;
+		background-color: black;
+		color: #fff;
+		transition: .2s;
+}
+
+*::selection{
+		background-color: #4f6d56;	
+		color: #eee;
+}
