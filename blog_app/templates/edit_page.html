@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Old+Uyghur&family=Oswald:wght@200&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="{% static 'img/monkey.ico' %}">
+	<link rel="stylesheet" href="{% static 'styles/general.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/edit_page.css' %}">
+</head>
+<body>
+		<form id="go-back-form" method="POST" action="{% url 'blog_app:admin_page' %}">
+				{%csrf_token%}
+				<input name="username" type="hidden" value={{user.username}} />
+				<input name="password" type="hidden" value={{user.password}} />
+				<button>Go back</button>
+		</form>
+
+		<div id="container">
+				<form method="POST" action="{% url 'blog_app:update_page' page.id %}">
+						{% csrf_token %}
+						<label>Title:</label>
+						<input type="text" name="title" value="{{page.title}}">
+						<label>Content:</label>
+						<textarea name="content">{{page.content}}</textarea>
+						<button>Save</button>
+				</form>
+		</div>			
+</body>
+</html>

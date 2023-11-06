@@ -1,0 +1,41 @@
+#container, #go-back-form{
+		width: 1000px;
+		margin: auto;
+		margin-top: 50px;
+}
+
+#container{
+		display: flex;
+		flex-direction: column;
+}
+
+#container input{
+		padding: 10px;
+}
+
+#container textarea{
+		resize: none;
+		height: 600px;
+		background-color: rgba(255, 255, 255, 1);
+		padding: 5px;
+		outline: none;
+}
+
+#container form{
+		display: flex;
+		flex-direction: column;
+}
+
+label{
+		margin: 10px 0px;
+}
+
+#container form button{
+		margin-top: 10px;
+}
+
+/*HOVER*/
+button:hover{
+		background-color: #fff;
+		color: #000;
+}

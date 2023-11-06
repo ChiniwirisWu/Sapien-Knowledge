@@ -38,7 +38,7 @@
 										<div class="page-title">
 												<p>{{el.title}}</p>
 												<div>
-														<form action="{% url 'blog_app:read_page' el.id %}"><button class="go-page-btn">Go</button></form>
+														<form action="{% url 'blog_app:edit_page' el.id %}"><button class="go-page-btn">Go</button></form>
 														<form action="{% url 'blog_app:remove_question' el.id %}"><button class="remove-page-btn">Remove</button></form>
 												</div>
 										</div>

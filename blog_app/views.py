@@ -40,6 +40,16 @@ def readPageView(request, page_id):
 def errorView(request):
     return render(request, 'error.html')
 
+
+def editPageView(request, page_id):
+    try:
+        page = Page.objects.get(pk=page_id)
+        users = User.objects.all()
+        user = User.objects.get(pk = users[0].id)
+    except Page.DoesNotExist:
+        return HttpResponseRedirect(reverse('blog_app:error_page'))
+    return render(request, 'edit_page.html', context={'page': page, 'user': user})
+
 #Question view
 def removePageQuestionView(request, page_id):
     try:
@@ -49,9 +59,7 @@ def removePageQuestionView(request, page_id):
     return render(request, 'remove_question.html', context={'page': page})
 
 def adminPageQuestionView(request):
-    return render(request, 'admin_question.html')
-
-
+    return render(request, 'admin_question.html') 
 #CRUD
 def createPage(request):
     description = request.POST['content'][:20] + "..."
@@ -69,7 +77,7 @@ def updatePage(request, page_id):
     page.content = request.POST['content']
     page.pub_date = timezone.now()
     page.save()
-    return HttpResponseRedirect(reverse('blog_app:read_page'), args=(page_id,))
+    return HttpResponseRedirect(reverse('blog_app:admin_page'))
 
 def removePage(request, page_id):
     try:
