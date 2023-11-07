@@ -50,13 +50,16 @@ def editPageView(request, page_id):
         return HttpResponseRedirect(reverse('blog_app:error_page'))
     return render(request, 'edit_page.html', context={'page': page, 'user': user})
 
-#Question view
 def removePageQuestionView(request, page_id):
     try:
         page = get_object_or_404(Page, pk=page_id)
+        users = User.objects.all()
+        user = users[0]
     except Page.DoesNotExist:
         return HttpResponseRedirect(reverse('blog_app:error_page'))
-    return render(request, 'remove_question.html', context={'page': page})
+    return render(request, 'remove_question.html', context={'page': page, 'user': user})
+
+#Question view
 
 def adminPageQuestionView(request):
     return render(request, 'admin_question.html') 
