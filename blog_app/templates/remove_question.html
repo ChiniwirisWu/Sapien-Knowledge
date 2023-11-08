@@ -13,10 +13,10 @@
 	<link rel="stylesheet" href="{% static 'styles/page.css' %}">
 </head>
 <body>
-		<form id="go-back-form" action="{% url 'blog_app:admin_page' %}" method="POST">
+		<form id="go-back-form" method="POST" action="{% url 'blog_app:admin_page' %}">
 				{%csrf_token%}
-				<input type="hidden" name="username" value="{{user.username}}" >
-				<input type="hidden" name="password" value="{{user.password}}" >
+				<input name="username" type="hidden" value={{user.username}} />
+				<input name="password" type="hidden" value={{user.password}} />
 				<button>Go back</button>
 		</form>
 
